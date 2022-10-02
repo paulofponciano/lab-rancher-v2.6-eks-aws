@@ -18,6 +18,10 @@ data "aws_subnet" "selected-private_az2" {
   id = var.subnet_id_private_az2
 }
 
+data "aws_security_group" "eks-sg" {
+  id = var.eks-sg
+}
+
 resource "aws_eip" "eip-rancher" {
   vpc      = true
   instance = aws_instance.create-ec2-rancher.id
@@ -34,7 +38,7 @@ resource "aws_eip" "eip-rancher" {
 resource "aws_instance" "create-ec2-rancher" {
   ami                    = data.aws_ami.ubuntu.image_id
   instance_type          = lookup(var.aws_details, "instance_type")
-  vpc_security_group_ids = [aws_security_group.rancher-sg.id, aws_security_group.default.id]
+  vpc_security_group_ids = [aws_security_group.rancher-sg.id, data.aws_security_group.eks-sg.id]
   subnet_id              = var.subnet_id_public_az1
   key_name               = lookup(var.aws_details, "key_name")
   user_data = templatefile("init-rancher.tpl",

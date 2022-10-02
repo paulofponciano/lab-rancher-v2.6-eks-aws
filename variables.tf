@@ -1,5 +1,5 @@
 variable "project_name" {
-  default = "pegasus"
+  default = "pegasus-2"
 }
 
 variable "env" {
@@ -7,38 +7,43 @@ variable "env" {
 }
 
 variable "rancher_name" {
-  default = "rancher-2-6-8"
+  default = "rancher-node"
+}
+
+variable "eks-sg" {
+  type    = string
+  default = "sg-03468a76eba533c6f"
 }
 
 variable "vpc_cidr_block" {
   type    = string
-  default = "172.32.0.0/16"
+  default = "172.28.0.0/16"
 }
 
 variable "subnet_id_public_az1" {
   type    = string
-  default = "subnet-01fb300640c4d4099"
+  default = "subnet-05343e4dc141521f9"
 }
 
 variable "subnet_id_public_az2" {
   type    = string
-  default = "subnet-04d75898fb1e0acb0"
+  default = "subnet-06ea2c1ad38d32f17"
 }
 
 variable "subnet_id_private_az1" {
   type    = string
-  default = "subnet-078079f8022c7ba1d"
+  default = "subnet-00a6a9c32c50a97ba"
 }
 
 variable "subnet_id_private_az2" {
   type    = string
-  default = "subnet-02bb72ea163cdc95f"
+  default = "subnet-06cc1a1b63da22f8f"
 }
 
 variable "aws_details" {
   type = map(string)
   default = {
-    region        = "us-east-1"
+    region        = "us-east-2"
     instance_type = "t3.medium"
     key_name      = "k8s" #keypair (.pem)
   }
